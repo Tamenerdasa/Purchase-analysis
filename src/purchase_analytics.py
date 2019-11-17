@@ -11,13 +11,9 @@
 #
 import csv
 #
-#
-#
 product_order_interm1 = []
 #
 final_list = []   
-#
-#
 #
 with open('./input/order_products.csv', 'r') as csvfile:
     csv_reader1 = csv.DictReader(csvfile)
@@ -43,21 +39,18 @@ with open('./input/products.csv', 'r') as csvfile:
         products_list.append(products)
 #
 #
-#
-#--------------------------------------------------------------------------------
-#For sovling this particular problem, I decided to create one common dictionary file. 
-#So, the idea is to map the product id in product.csv file with the one in order_product.csv, 
-#which is thier common parameter. In the first section of the following programe 
-#I formed a dictionary from the product id and department id of product.csv file.
-#Then I add the department ids for each product id in order_products file. Finally,
-#I remove the product id colomn.    
-#--------------------------------------------------------------------------------
-#
-#
 def mapping_dict(products_list,order_products_list):
- #
+    """
+    #For sovling this particular problem, I decided to create one common dictionary file. 
+    So, the idea is to map the product id in product.csv file with the one in order_product.csv, 
+    which is thier common parameter. In the first section of the following programe 
+    I formed a dictionary from the product id and department id of product.csv file.
+    Then I add the department ids for each product id in order_products file. Finally,
+    I remove the product id colomn. 
+    """
+    #
     global  product_order_interm1
-#
+    #
     keys = []
     values = []
     for i in products_list:
@@ -72,13 +65,10 @@ def mapping_dict(products_list,order_products_list):
                 dept_id.append([product_dict[y]])
             else:
                 continue
-    #print(dept_id)
 #
     product_order_sum = []
     for k in range(len(order_products_list)):
-        #del product_summary[0]
         product_order_sum.append(dept_id[k] + order_products_list[k])
-    #print(product_order_sum)
 #
 #For each product id I assigned the corrosponding department id and merged 
 #it with product summary list that we have in the first section.
@@ -92,7 +82,7 @@ def mapping_dict(products_list,order_products_list):
             else:
                 continue
 #
-#There is no need of keeping the product id data anymore, and this part 
+#There is no need to keep the product id data anymore, and this part 
 #just removes product id column from the above list
 #
     i=0
@@ -104,18 +94,16 @@ def mapping_dict(products_list,order_products_list):
     #print(product_order_interm1)
 #
 #
-#-------------------------------------------------------------------------------------
-#Once I prepared the data that I needed for my problem, I did further manipulation to get the 
-#total order and first time orders of ech department. 
-#For the sake of easier maniulation I splitted the data on each parameter to different 
-#temporary lists. Then depending on the values of the 'add_to_cart_order' and 'reordered', 
-#I find the number of 'number_of_order' and 'number_of_first_orders' as well as the 
-#ratio of the latter two. 
-#--------------------------------------------------------------------------------------
-#
-#
 def manipulate_interm_list(product_order_interm1):
-#
+    """
+    Once I prepared the data that I needed for my problem, I did further manipulation to get the 
+    total order and first time orders of ech department. For the sake of easier maniulation 
+    I splitted the data on each parameter to different 
+    temporary lists. Then depending on the values of the 'add_to_cart_order' and 'reordered', 
+    I find the number of 'number_of_order' and 'number_of_first_orders' as well as the 
+    ratio of the latter two. 
+    """
+    #
     temp1 = []
     temp2 = []
     temp3 = []
